@@ -9,19 +9,19 @@ integração com um dispositivo IoT simulado.
 
 ---
 
-## 👥 Integrantes do grupo
+## Integrantes do grupo
 
 João Vitor Carotta Ribeiro - RM 555187
 Arthur Bueno de Oliveira - RM 558396
 Victor Magdaleno Marcos - RM 556729
 
-## 🎯 Objetivo
+## Objetivo
 
 Demonstrar o funcionamento do modelo **publish/subscribe** do MQTT, o uso de
 tópicos e o gerenciamento de conexão e mensagens em uma aplicação mobile, sem
 necessidade de hardware físico (um simulador faz o papel do dispositivo).
 
-## 🧰 Tecnologias e versões
+##  Tecnologias e versões
 
 | Tecnologia | Versão | Uso |
 |---|---|---|
@@ -35,7 +35,7 @@ necessidade de hardware físico (um simulador faz o papel do dispositivo).
 | buffer | ^6.0.3 | Polyfill necessário ao mqtt.js no RN |
 | Node.js | 18+ | Execução do simulador |
 
-## 📁 Estrutura do projeto
+##  Estrutura do projeto
 
 ```text
 .
@@ -74,7 +74,7 @@ necessidade de hardware físico (um simulador faz o papel do dispositivo).
     └── polyfills.ts
 ```
 
-## 🚀 Instalação e execução do aplicativo
+##  Instalação e execução do aplicativo
 
 Pré-requisitos: **Node.js 18+**, **npm** e o app **Expo Go** no celular (ou um
 emulador Android / simulador iOS).
@@ -93,7 +93,7 @@ npm start
 > O app tenta conectar automaticamente ao broker salvo ao iniciar. A conexão
 > também pode ser gerenciada manualmente na aba **Configurações**.
 
-## 🌐 Broker MQTT (WebSocket)
+##  Broker MQTT (WebSocket)
 
 Por padrão o aplicativo usa o broker público **EMQX** via **WSS**:
 
@@ -104,7 +104,7 @@ wss://broker.emqx.io:8084/mqtt
 - **Porta WebSocket segura (WSS):** `8084` — usada pelo **aplicativo**.
 - **Porta MQTT TCP:** `1883` — usada pelo **simulador** (Node.js).
 
-> ⚠️ Não confundir a porta TCP (1883) com a porta WebSocket (8084/8083). O app
+> Não confundir a porta TCP (1883) com a porta WebSocket (8084/8083). O app
 > precisa de uma URL **WS/WSS**. Nenhuma credencial é necessária no broker
 > público; **nenhuma senha ou token é incluída no repositório**.
 
@@ -135,7 +135,7 @@ O estado exibido da lâmpada **reflete a mensagem recebida** em
 `.../lampada/estado`, e não apenas o toque no botão: o app publica o comando, o
 simulador recebe e publica o novo estado, e só então a interface muda.
 
-## 🤖 Simulador (reproduzível, sem hardware)
+##  Simulador (reproduzível, sem hardware)
 
 O repositório inclui um simulador em Node.js que faz o papel do dispositivo:
 publica temperatura/umidade a cada 5 s e responde aos comandos da lâmpada.
@@ -178,7 +178,7 @@ mosquitto_sub -h broker.emqx.io -t "fiap/turma/grupo01/lampada/comando"
 mosquitto_pub -h broker.emqx.io -t "fiap/turma/grupo01/lampada/estado" -m '{"state":"ON"}'
 ```
 
-## ✅ Ciclo completo de verificação
+##  Ciclo completo de verificação
 
 1. O simulador publica uma **temperatura** → a tela atualiza.
 2. O simulador publica uma **umidade** → a tela atualiza.
@@ -187,10 +187,14 @@ mosquitto_pub -h broker.emqx.io -t "fiap/turma/grupo01/lampada/estado" -m '{"sta
 5. O app recebe e exibe o estado **Ligada**.
 6. O mesmo fluxo funciona para **Desligar**.
 
-## 🖼️ Telas e funcionalidades
+##  Telas e funcionalidades
 
-> Adicione os prints reais em uma pasta `docs/` e referencie-os abaixo, por
-> exemplo `![Dashboard](docs/dashboard.png)`.
+<img width="1918" height="955" alt="image" src="https://github.com/user-attachments/assets/ff2dd6e3-6966-4122-9d0d-b8cd8ddadad9" />
+
+<img width="1918" height="957" alt="image" src="https://github.com/user-attachments/assets/1db99300-116b-4aad-a641-121035adecb7" />
+
+<img width="1907" height="959" alt="image" src="https://github.com/user-attachments/assets/4ccaa0aa-c675-49af-9ee2-b015d037d80b" />
+
 
 ### 1. Dashboard
 - Status da conexão (**conectando / conectado / desconectado / erro**) com
@@ -211,12 +215,12 @@ mosquitto_pub -h broker.emqx.io -t "fiap/turma/grupo01/lampada/estado" -m '{"sta
 - Alternância de **tema Light/Dark** (persistida).
 - Documentação dos tópicos dentro do próprio app.
 
-## 💾 Preferências locais (AsyncStorage)
+##  Preferências locais (AsyncStorage)
 
 - A **URL do broker** e o **tema** são salvos com AsyncStorage e **recuperados
   ao reiniciar** o aplicativo.
 
-## 🧱 Decisões técnicas
+##  Decisões técnicas
 
 - **Comunicação isolada da UI:** toda a lógica MQTT fica em
   [`src/services/mqttService.ts`](src/services/mqttService.ts); a UI consome via
@@ -232,7 +236,7 @@ mosquitto_pub -h broker.emqx.io -t "fiap/turma/grupo01/lampada/estado" -m '{"sta
 - **Polyfills:** `Buffer`/`process` em [`src/polyfills.ts`](src/polyfills.ts),
   carregados em [`index.ts`](index.ts) antes do cliente MQTT.
 
-## ⚠️ Limitações e observações
+## Limitações e observações
 
 - O broker público é compartilhado; use um `GROUP_ID` exclusivo para evitar
   interferência. Mensagens de terceiros no mesmo tópico podem aparecer.
@@ -242,7 +246,7 @@ mosquitto_pub -h broker.emqx.io -t "fiap/turma/grupo01/lampada/estado" -m '{"sta
   configure usuário/senha fora do controle de versão (ex.: variáveis de
   ambiente / arquivo `.env`, já ignorado pelo `.gitignore`).
 
-## 📋 Checklist de entrega
+##  Checklist de entrega
 
 - [x] Conecta ao broker via WebSocket.
 - [x] Mostra status da conexão e erros.
