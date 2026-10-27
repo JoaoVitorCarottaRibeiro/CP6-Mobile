@@ -1,0 +1,40 @@
+# dependencies
+node_modules/
+simulator/node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+
+# Env / secrets (nunca comitar credenciais)
+.env
+.env.*
+*.local
+
+# IDE
+.idea/
+.vscode/
+
+# Claude Code (arquivos de controle do assistente)
+.claude/
